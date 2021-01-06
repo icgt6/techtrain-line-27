@@ -92,9 +92,8 @@ public class Main {
         sdf.setTimeZone(TimeZone.getTimeZone("UTC")); // タイムゾーンが適用されないように
         Date prevDate = sdf.parse(previous.split(" ")[0]);
         Date currentDate = sdf.parse(current.split(" ")[0]);
-        Date diff = new Date(currentDate.getTime() - prevDate.getTime());
 
-        double passed = diff.getTime() / 1000.0; // 経過時間(s)
+        double passed = (currentDate.getTime() - prevDate.getTime()) / 1000.0; // 経過時間(s)
         double dist = Double.parseDouble(current.split(" ")[1]); // 移動距離(m)
         int speed = (int) ((dist / 1000) / (passed / 3600)); // 時速(km/h)
 
