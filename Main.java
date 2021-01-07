@@ -24,20 +24,20 @@ public class Main {
                 list.add(str);
             }
         } catch (IOException e) {
-            System.out.println("ERROR 入出力に失敗しました");
+            System.err.println("ERROR 入出力に失敗しました");
             e.printStackTrace();
             System.exit(1);
         }
 
         String firstDist = list.get(0).split(" ")[1];
         if (!firstDist.equals("0.0")) {
-            System.out.println("ERROR 第1レコードの走行距離は0.0でなければなりません");
+            System.err.println("ERROR 第1レコードの走行距離は0.0でなければなりません");
             System.exit(2);
         }
 
         // check data
         if (list.size() < 2) {
-            System.out.println("ERROR レコードは2つ(乗車開始、終了)以上存在しなければなりません");
+            System.err.println("ERROR レコードは2つ(乗車開始、終了)以上存在しなければなりません");
             System.exit(3);
         }
 
@@ -47,14 +47,14 @@ public class Main {
             int hour = Integer.parseInt(data[0].split(":")[0]);
 
             if (hour < 0 || hour > 99) {
-                System.out.println("ERROR 時刻は0～99時の間でなければなりません");
-                System.out.println("該当行: " + record);
+                System.err.println("ERROR 時刻は0～99時の間でなければなりません");
+                System.err.println("該当行: " + record);
                 System.exit(2);
             }
 
             if (distance < 0 || distance >= 100) {
-                System.out.println("ERROR 距離は0.0～99.9の間でなければなりません");
-                System.out.println("該当行: " + record);
+                System.err.println("ERROR 距離は0.0～99.9の間でなければなりません");
+                System.err.println("該当行: " + record);
                 System.exit(2);
             }
         }
@@ -64,19 +64,19 @@ public class Main {
             try {
                 calculate(list.get(i), list.get(i + 1));
             } catch (ParseException e) {
-                System.out.println("ERROR 時刻の形式が違います");
+                System.err.println("ERROR 時刻の形式が違います");
                 e.printStackTrace();
                 System.exit(2);
             } catch (DateTimeException e1) {
-                System.out.println("ERROR レコードが時系列順になっていません");
+                System.err.println("ERROR レコードが時系列順になっていません");
                 e1.printStackTrace();
                 System.exit(3);
             }
         }
 
         if (distSum < 0.1) {
-            System.out.println("ERROR 総走行距離が0.1以上ではありません");
-            System.out.println("総走行距離 " + distSum);
+            System.err.println("ERROR 総走行距離が0.1以上ではありません");
+            System.err.println("総走行距離 " + distSum);
             System.exit(4);
         }
 
