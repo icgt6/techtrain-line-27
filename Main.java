@@ -32,13 +32,13 @@ public class Main {
         String firstDist = list.get(0).split(" ")[1];
         if (!firstDist.equals("0.0")) {
             System.err.println("ERROR 第1レコードの走行距離は0.0でなければなりません");
-            System.exit(2);
+            System.exit(1);
         }
 
         // check data
         if (list.size() < 2) {
             System.err.println("ERROR レコードは2つ(乗車開始、終了)以上存在しなければなりません");
-            System.exit(3);
+            System.exit(1);
         }
 
         for (String record : list) {
@@ -49,13 +49,13 @@ public class Main {
             if (hour < 0 || hour > 99) {
                 System.err.println("ERROR 時刻は0～99時の間でなければなりません");
                 System.err.println("該当行: " + record);
-                System.exit(2);
+                System.exit(1);
             }
 
             if (distance < 0 || distance >= 100) {
                 System.err.println("ERROR 距離は0.0～99.9の間でなければなりません");
                 System.err.println("該当行: " + record);
-                System.exit(2);
+                System.exit(1);
             }
         }
 
@@ -66,18 +66,18 @@ public class Main {
             } catch (ParseException e) {
                 System.err.println("ERROR 時刻の形式が違います");
                 e.printStackTrace();
-                System.exit(2);
+                System.exit(1);
             } catch (DateTimeException e1) {
                 System.err.println("ERROR レコードが時系列順になっていません");
                 e1.printStackTrace();
-                System.exit(3);
+                System.exit(1);
             }
         }
 
         if (distSum < 0.1) {
             System.err.println("ERROR 総走行距離が0.1以上ではありません");
             System.err.println("総走行距離 " + distSum);
-            System.exit(4);
+            System.exit(1);
         }
 
         // calculate fare
